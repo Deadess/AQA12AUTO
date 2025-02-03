@@ -12,59 +12,77 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.time.LocalDateTime;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class RegistrationTests {
-    private WebDriver driver;
+public class RegistrationTests extends BaseTest{
+    Actions actions;
+
+    String login;
+    By fNameLocator = By.name("firstName");
+    By lNameLocator = By.name("lastName");
+    By dateOfBirthLocator = By.name("dateOfBirth");
+    By emailLocator = By.name("email");
+    By passwordLocator = By.name("password");
+    By passwordConfirmationLocator = By.name("passwordConfirmation");
+    By submitButtonLocator = By.xpath("//button[@type='submit']");
+    By errorLocator = By.xpath("//*[contains(text(), 'Minimum 8 characters')]");
+
+    WebElement fName;
+    WebElement lName;
+    WebElement dateOfBirth;
+    WebElement email;
+    WebElement pword;
+    WebElement pwordConfirmation;
+    WebElement submitButton;
+    WebElement errorMessage;
+
     @Before
-    public void setUp() {
-        driver = new ChromeDriver();
+    public void setUpActions() {
+        login = "a+"+ LocalDateTime.now().getNano() +"@a";
+        actions = new Actions(driver);
         driver.get("https://qa-course-01.andersenlab.com/registration");
     }
+
     @Test
     public void testValidRegistration() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement fName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("firstName")));
+        fName = wait.until(ExpectedConditions.visibilityOfElementLocated(fNameLocator));
         fName.sendKeys("John");
-        WebElement lName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("lastName")));
+        lName = wait.until(ExpectedConditions.visibilityOfElementLocated(lNameLocator));
         lName.sendKeys("Doe");
-        WebElement dateOfBirth = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("dateOfBirth")));
+        dateOfBirth = wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthLocator));
         dateOfBirth.sendKeys("05/04/2000");
-        Actions actions = new Actions(driver);
         actions.sendKeys(Keys.ESCAPE).perform();
-        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
-        email.sendKeys("aaaa@a");
-        WebElement pword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+        email = wait.until(ExpectedConditions.visibilityOfElementLocated(emailLocator));
+        email.sendKeys(login);
+        pword = wait.until(ExpectedConditions.visibilityOfElementLocated(passwordLocator));
         pword.sendKeys("123123123");
-        WebElement pwordConfirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("passwordConfirmation")));
+        pwordConfirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(passwordConfirmationLocator));
         pwordConfirmation.sendKeys("123123123");
-        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@type='submit']")));
+        submitButton = wait.until(ExpectedConditions.elementToBeClickable(submitButtonLocator));
         submitButton.click();
-        WebElement loginField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
-        assertTrue(loginField.isDisplayed());
+//        WebElement loginField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
+//        assertTrue(loginField.isDisplayed());
+        wait.until(ExpectedConditions.urlContains("/login"));
     }
     @Test
     public void testShortPasswordRegistration() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement fName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("firstName")));
+        fName = wait.until(ExpectedConditions.visibilityOfElementLocated(fNameLocator));
         fName.sendKeys("John");
-        WebElement lName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("lastName")));
+        lName = wait.until(ExpectedConditions.visibilityOfElementLocated(lNameLocator));
         lName.sendKeys("Doe");
-        WebElement dateOfBirth = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("dateOfBirth")));
+        dateOfBirth = wait.until(ExpectedConditions.visibilityOfElementLocated(dateOfBirthLocator));
         dateOfBirth.sendKeys("05/04/2000");
-        Actions actions = new Actions(driver);
         actions.sendKeys(Keys.ESCAPE).perform();
-        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
+        email = wait.until(ExpectedConditions.visibilityOfElementLocated(emailLocator));
         email.sendKeys("aaaa@a");
-        WebElement pword = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("password")));
+        pword = wait.until(ExpectedConditions.visibilityOfElementLocated(passwordLocator));
         pword.sendKeys("123");
-        WebElement pwordConfirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("passwordConfirmation")));
+        pwordConfirmation = wait.until(ExpectedConditions.visibilityOfElementLocated(passwordConfirmationLocator));
         pwordConfirmation.sendKeys("123");
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), 'Minimum 8 characters')]")));
+        errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(errorLocator));
         assertTrue(errorMessage.isDisplayed());
-    }
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 }
