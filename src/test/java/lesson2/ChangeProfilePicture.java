@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.nio.file.Paths;
 import java.time.Duration;
 
 public class ChangeProfilePicture {
@@ -27,7 +28,7 @@ public class ChangeProfilePicture {
         try {
             Robot robot = new Robot();
             robot.setAutoDelay(1000);
-            String photoPath = "C:\\photo_knight.jpg";
+            String photoPath = Paths.get(System.getProperty("user.dir"), "src", "test", "resources", "photo_knight.jpg").toAbsolutePath().toString();
             StringSelection stringSelection = new StringSelection(photoPath);
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
             robot.keyPress(KeyEvent.VK_CONTROL);
