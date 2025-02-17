@@ -13,7 +13,7 @@ import java.time.Duration;
 
 public class BaseTest {
     WebDriver driver;
-    WebDriverWait wait;
+    public WebDriverWait wait;
     String baseUrl = "https://qa-course-01.andersenlab.com/";
 
     By emailLocator = By.name("email");
