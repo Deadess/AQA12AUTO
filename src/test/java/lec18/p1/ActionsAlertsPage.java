@@ -1,4 +1,4 @@
-package lec18;
+package lec18.p1;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;

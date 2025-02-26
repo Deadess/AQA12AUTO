@@ -1,6 +1,5 @@
-package lec18;
+package lec18.p1;
 
-import lec18.test10.LoginPage;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

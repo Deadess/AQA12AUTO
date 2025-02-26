@@ -1,4 +1,4 @@
-package lec18;
+package lec18.p1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterAll;
