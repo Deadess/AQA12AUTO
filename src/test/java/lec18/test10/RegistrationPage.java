@@ -63,29 +63,29 @@ public class RegistrationPage {
         PageFactory.initElements(driver, this);
     }
 
-    @Step("Открытие страницы регистрации")
+    @Step("Page opening")
     public void open() {
-        logger.info("Открываем страницу регистрации");
+        logger.info("Opening registration page");
         driver.get("https://qa-course-01.andersenlab.com/registration");
-        logger.info("Страница регистрации открыта");
+        logger.info("Registration page's opened");
     }
 
-    @Step("Регистрация с данными: имя={firstName}, фамилия={lastName}, дата рождения={dob}, email={email}, пароль={password}, подтверждение пароля={confirmPassword}")
+    @Step("Registration data: name={firstName}, lastname={lastName}, doB={dateOfBirth}, email={email}, password={password}, confirmPassword={confirmationPassword}")
     public void register(String firstName, String lastName, String dob, String email, String password, String confirmPassword) {
-        logger.info("Вводим имя: {}", firstName);
+        logger.info("Entering name: {}", firstName);
         firstNameField.sendKeys(firstName);
-        logger.info("Вводим фамилию: {}", lastName);
+        logger.info("Entering lastname: {}", lastName);
         lastNameField.sendKeys(lastName);
-        logger.info("Вводим дату рождения: {}", dob);
+        logger.info("Entering date of birth: {}", dob);
         dobField.sendKeys(dob);
         dobField.sendKeys(Keys.ESCAPE);
-        logger.info("Вводим email: {}", email);
+        logger.info("Entering email: {}", email);
         emailField.sendKeys(email);
-        logger.info("Вводим пароль: {}", password);
+        logger.info("Entering password: {}", password);
         passwordField.sendKeys(password);
-        logger.info("Вводим подтверждение пароля: {}", confirmPassword);
+        logger.info("Entering password again: {}", confirmPassword);
         confirmPasswordField.sendKeys(confirmPassword);
-        logger.info("Нажимаем кнопку Submit");
+        logger.info("Hitting Submit");
         submitButton.click();
     }
 

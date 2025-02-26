@@ -16,8 +16,8 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Epic("Тестирование авторизации и регистрации")
-@Feature("Функциональные тесты")
+@Epic("Testing Authentication and Registration")
+@Feature("Functional Tests")
 public class AuthTests {
     private static final Logger logger = LoggerFactory.getLogger(AuthTests.class);
     private static WebDriver driver;
@@ -37,130 +37,130 @@ public class AuthTests {
 
     @BeforeAll
     public static void setUp() {
-        logger.info("Инициализация WebDriver и страниц");
+        logger.info("Initializing WebDriver and pages");
         driver = new ChromeDriver();
         loginPage = new LoginPage2(driver);
         registrationPage = new RegistrationPage(driver);
-        logger.info("Настройка завершена");
+        logger.info("Setup completed");
     }
 
     @AfterAll
     public static void tearDown() {
-        logger.info("Закрытие WebDriver");
+        logger.info("Closing WebDriver");
         if (driver != null) {
             driver.quit();
         }
-        logger.info("WebDriver закрыт");
+        logger.info("WebDriver closed");
     }
 
     @Test
-    @Story("Логин с валидными данными")
-    @Description("Проверка успешного входа с корректными email и паролем")
+    @Story("Login with valid credentials")
+    @Description("Checking successful login with correct email and password")
     public void testLoginWithValidCredentials() { // TC01
-        logger.info("Запуск теста TC01: Логин с валидными данными");
+        logger.info("Starting test TC01: Login with valid credentials");
         loginPage.open();
         loginPage.login("e@e", "123123123");
         assertTrue(loginPage.isDashboardDisplayed(), "User should be redirected to dashboard");
-        logger.info("Тест TC01 успешно завершен");
+        logger.info("Test TC01 completed successfully");
     }
 
     @Test
-    @Story("Логин с невалидными данными")
-    @Description("Проверка отображения ошибки при входе с некорректными данными")
+    @Story("Login with invalid credentials")
+    @Description("Checking error display when logging in with incorrect credentials")
     public void testLoginWithInvalidCredentials() { // TC02
-        logger.info("Запуск теста TC02: Логин с невалидными данными");
+        logger.info("Starting test TC02: Login with invalid credentials");
         loginPage.open();
         loginPage.login("invalid@gmail.com", "Invalid@123");
         assertTrue(loginPage.getErrorMessageLogin());
-        logger.info("Тест TC02 успешно завершен");
+        logger.info("Test TC02 completed successfully");
     }
 
     @Test
-    @Story("Загрузка страницы регистрации")
-    @Description("Проверка успешной загрузки страницы регистрации")
+    @Story("Loading the registration page")
+    @Description("Checking successful loading of the registration page")
     public void testRegistrationPageLoads() { // TC03
-        logger.info("Запуск теста TC03: Загрузка страницы регистрации");
+        logger.info("Starting test TC03: Loading the registration page");
         registrationPage.open();
         assertTrue(registrationPage.isPageLoaded(), "Registration page should load successfully");
-        logger.info("Тест TC03 успешно завершен");
+        logger.info("Test TC03 completed successfully");
     }
 
     @Test
-    @Story("Регистрация с валидными данными")
-    @Description("Проверка успешной регистрации с корректными данными")
+    @Story("Registration with valid data")
+    @Description("Checking successful registration with correct data")
     public void testRegistrationWithValidData() { // TC04
-        logger.info("Запуск теста TC04: Регистрация с валидными данными");
+        logger.info("Starting test TC04: Registration with valid data");
         String randomString = generateRandomString();
         registrationPage.open();
         registrationPage.register("John" + randomString, "Doe", "01.01.2001", "john@" + randomString + ".com", "123123123", "123123123");
         assertTrue(loginPage.isDashboardDisplayed(), "User should be redirected to login page");
-        logger.info("Тест TC04 успешно завершен");
+        logger.info("Test TC04 completed successfully");
     }
 
     @Test
-    @Story("Регистрация с коротким паролем")
-    @Description("Проверка ошибки при регистрации с паролем короче 8 символов")
+    @Story("Registration with a short password")
+    @Description("Checking error when registering with a password shorter than 8 characters")
     public void testRegistrationWithShortPassword() { // TC05
-        logger.info("Запуск теста TC05: Регистрация с коротким паролем");
+        logger.info("Starting test TC05: Registration with a short password");
         registrationPage.open();
         registrationPage.register("John", "Doe", "01.01.2001", "john@example.com", "Pass", "Pass");
         assertTrue(registrationPage.getErrorMessageMin());
-        logger.info("Тест TC05 успешно завершен");
+        logger.info("Test TC05 completed successfully");
     }
 
     @Test
-    @Story("Регистрация с длинным паролем")
-    @Description("Проверка ошибки при регистрации с паролем длиннее 20 символов")
+    @Story("Registration with a long password")
+    @Description("Checking error when registering with a password longer than 20 characters")
     public void testRegistrationWithLongPassword() { // TC06
-        logger.info("Запуск теста TC06: Регистрация с длинным паролем");
+        logger.info("Starting test TC06: Registration with a long password");
         registrationPage.open();
         registrationPage.register("John", "Doe", "01.01.2001", "john@example.com",
                 "Password1233456789000000000000000", "Password1233456789000000000000000");
         assertTrue(registrationPage.getErrorMessageMax());
-        logger.info("Тест TC06 успешно завершен");
+        logger.info("Test TC06 completed successfully");
     }
 
     @Test
-    @Story("Регистрация с пустым именем")
-    @Description("Проверка ошибки при регистрации с пустым полем имени")
+    @Story("Registration with an empty name")
+    @Description("Checking error when registering with an empty name field")
     public void testRegistrationWithEmptyName() { // TC07
-        logger.info("Запуск теста TC07: Регистрация с пустым именем");
+        logger.info("Starting test TC07: Registration with an empty name");
         registrationPage.open();
         registrationPage.register("", "Doe", "01.01.2001", "john@example.com", "Password123", "Password123");
         assertTrue(registrationPage.getErrorMessageReq());
-        logger.info("Тест TC07 успешно завершен");
+        logger.info("Test TC07 completed successfully");
     }
 
     @Test
-    @Story("Регистрация с невалидным email")
-    @Description("Проверка ошибки при регистрации с некорректным форматом email")
+    @Story("Registration with an invalid email")
+    @Description("Checking error when registering with an incorrect email format")
     public void testRegistrationWithInvalidEmail() { // TC08
-        logger.info("Запуск теста TC08: Регистрация с невалидным email");
+        logger.info("Starting test TC08: Registration with an invalid email");
         registrationPage.open();
         registrationPage.register("John", "Doe", "01.01.2001", "johnexample.com", "Password123", "Password123");
         assertTrue(registrationPage.getErrorMessageEmail());
-        logger.info("Тест TC08 успешно завершен");
+        logger.info("Test TC08 completed successfully");
     }
 
     @Test
-    @Story("Регистрация с несовпадающими паролями")
-    @Description("Проверка ошибки при регистрации с паролями, которые не совпадают")
+    @Story("Registration with mismatched passwords")
+    @Description("Checking error when registering with passwords that do not match")
     public void testRegistrationWithPasswordMismatch() { // TC09
-        logger.info("Запуск теста TC09: Регистрация с несовпадающими паролями");
+        logger.info("Starting test TC09: Registration with mismatched passwords");
         registrationPage.open();
         registrationPage.register("John", "Doe", "01.01.2001", "john@example.com", "Password123", "Password321");
         assertTrue(registrationPage.getErrorMessagePmm());
-        logger.info("Тест TC09 успешно завершен");
+        logger.info("Test TC09 completed successfully");
     }
 
     @Test
-    @Story("Регистрация с пустой фамилией")
-    @Description("Проверка ошибки при регистрации с пустым полем фамилии")
+    @Story("Registration with an empty last name")
+    @Description("Checking error when registering with an empty last name field")
     public void testRegistrationWithEmptyLastName() { // TC10
-        logger.info("Запуск теста: Регистрация с пустой фамилией");
+        logger.info("Starting test: Registration with an empty last name");
         registrationPage.open();
         registrationPage.register("John", "", "01.01.2001", "john@example.com", "Password123", "Password123");
         assertTrue(registrationPage.getErrorMessageReq());
-        logger.info("Тест с пустой фамилией успешно завершен");
+        logger.info("Test with an empty last name completed successfully");
     }
 }
