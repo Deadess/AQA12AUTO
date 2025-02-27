@@ -1,4 +1,4 @@
-package lec18;
+package lec18.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class DragDropPage extends BaseAQAPage {
+public class DragDropPage extends BasePage {
     @FindBy(id = "manual1")
     private WebElement manual1;
 
@@ -42,30 +42,25 @@ public class DragDropPage extends BaseAQAPage {
 
     public DragDropPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
-        this.actions = new Actions(this.getCurrentDriver());
-        PageFactory.initElements(this.getCurrentDriver(), this);
+        this.actions = new Actions(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public void sortResponsibilities() {
-        WebDriver currentDriver = this.getCurrentDriver();
-        WebDriverWait currentWait = this.getCurrentWait();
-
-        System.out.println("Sorting responsibilities, wait state: " + (currentWait != null) + ", driver state: " + (currentDriver != null));
-
         try {
-            WebElement sourceManual1 = currentWait.until(ExpectedConditions.visibilityOf(manual1));
-            WebElement sourceManual2 = currentWait.until(ExpectedConditions.visibilityOf(manual2));
-            WebElement sourceAuto1 = currentWait.until(ExpectedConditions.visibilityOf(auto1));
-            WebElement sourceAuto2 = currentWait.until(ExpectedConditions.visibilityOf(auto2));
-            WebElement targetManual1 = currentWait.until(ExpectedConditions.visibilityOf(this.targetManual1));
-            WebElement targetManual2 = currentWait.until(ExpectedConditions.visibilityOf(this.targetManual2));
-            WebElement targetAuto1 = currentWait.until(ExpectedConditions.visibilityOf(this.targetAuto1));
-            WebElement targetAuto2 = currentWait.until(ExpectedConditions.visibilityOf(this.targetAuto2));
+            WebElement sourceManual1 = wait.until(ExpectedConditions.visibilityOf(manual1));
+            WebElement sourceManual2 = wait.until(ExpectedConditions.visibilityOf(manual2));
+            WebElement sourceAuto1 = wait.until(ExpectedConditions.visibilityOf(auto1));
+            WebElement sourceAuto2 = wait.until(ExpectedConditions.visibilityOf(auto2));
+            WebElement targetManual1 = wait.until(ExpectedConditions.visibilityOf(this.targetManual1));
+            WebElement targetManual2 = wait.until(ExpectedConditions.visibilityOf(this.targetManual2));
+            WebElement targetAuto1 = wait.until(ExpectedConditions.visibilityOf(this.targetAuto1));
+            WebElement targetAuto2 = wait.until(ExpectedConditions.visibilityOf(this.targetAuto2));
             actions.dragAndDrop(sourceManual1, targetManual1).perform();
             actions.dragAndDrop(sourceManual2, targetManual2).perform();
             actions.dragAndDrop(sourceAuto1, targetAuto1).perform();
             actions.dragAndDrop(sourceAuto2, targetAuto2).perform();
-            WebElement message = currentWait.until(ExpectedConditions.visibilityOf(successMessage));
+            WebElement message = wait.until(ExpectedConditions.visibilityOf(successMessage));
             assertTrue(message.isDisplayed(), "Success message 'Congratulations! Let's test for the best!' is not displayed");
         } catch (Exception e) {
             System.out.println("Error during drag and drop operations: " + e.getMessage());
