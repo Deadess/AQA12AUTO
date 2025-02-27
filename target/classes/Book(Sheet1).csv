@@ -1,0 +1,134 @@
+Test Case ID,Test Case Description,Pre-conditions,Test Steps,Test Data,Expected Result,Postconditions,Actual Result,Status
+TC01,Check user login with valid credentials,User is registered with valid credentials.,"1. Go to https://qa-course-01.andersenlab.com/
+2. Enter valid email ID. 
+3. Enter password. 
+4. Click submit.",Email – sample@gmail.com Password – Sample@123,User should be able to login successfully.,User is redirected to the dashboard.,Login was successful,Pass
+TC02,Check user login with invalid credentials,N/A,"1. Go to https://qa-course-01.andersenlab.com/ 
+2. Enter invalid email ID. 
+3. Enter password. 
+4. Click submit.",Email – invalid@gmail.com Password – Invalid@123,An error message should be displayed.,User remains on the login page.,Error message displayed,Pass
+TC03,Verify the registration page loads successfully,N/A,"1. Go to https://qa-course-01.andersenlab.com/
+2. Navigate to the registration page.",N/A,Registration page should load without errors.,N/A,Page loaded successfully,Pass
+TC04,Verify registration with all valid inputs,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name.
+3. Enter date of birth.
+4. Enter valid email. 
+5. Enter valid password. 
+6. Confirm password. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Password123",User should be successfully registered.,User is redirected to the login page.,User was successfully registered.,Pass
+TC05,Verify registration with password less than 8 characters,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name.
+3. Enter date of birth.
+4. Enter valid email. 
+5. Enter password with less than 8 characters. 
+6. Confirm password. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Pass",Error message indicating password must be at least 8 characters.,User remains on the registration page.,Error message displayed.,Pass
+TC06,Verify registration with password more than 20 characters,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name. 
+3. Enter date of birth.
+4. Enter valid email. 
+5. Enter password with more than 20 characters. 
+6. Confirm password. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Password1233456789000000000000000",Error message indicating password must not exceed 20 characters.,User remains on the registration page.,Error message displayed.,Pass
+TC07,Verify registration with empty name field,User is not registered.,"1. Navigate to the registration page. 
+2. Leave name field empty.
+3. Enter date of birth.
+4. Enter valid email. 
+5. Enter valid password. 
+6. Confirm password. 
+7. Submit the form.","
+Last name: Doe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Password123",Error message indicating name is required.,User remains on the registration page.,Error message displayed.,Pass
+TC08,Verify registration with invalid email format,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name. 
+3. Enter date of birth.
+4. Enter invalid email format. 
+5. Enter valid password. 
+6. Confirm password. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: johnexample.com 
+Password/Confirm: Password123",Error message indicating invalid email format.,User remains on the registration page.,Error message displayed.,Pass
+TC09,Verify registration with password mismatch,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name. 
+3. Enter date of birth.
+4. Enter valid email. 
+5. Enter valid password. 
+6. Enter different password in confirm password field. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Password123/Password321",Error message indicating passwords do not match.,User remains on the registration page.,Error message displayed.,Pass
+TC10,Verify registration with all fields empty,User is not registered.,"1. Navigate to the registration page. 
+2. Leave all fields empty. 
+3. Submit the form.",,Error messages indicating all fields are required.,User remains on the registration page.,Error messages displayed.,Pass
+TC11,Verify registration with maximum length email,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name. 
+3. Enter date of birth.
+4. Enter email with maximum allowed length. 
+5. Enter valid password. 
+6. Confirm password. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: johnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn@example.com 
+Password/Confirm: Password123",User should be successfully registered.,User is redirected to the login page.,User was successfully registered.,Pass
+TC12,Verify registration with name containing special characters,User is not registered.,"1. Navigate to the registration page. 
+2. Enter name with special characters. 
+3. Enter date of birth.
+4. Enter valid email. 
+5. Enter valid password. 
+6. Confirm password. 
+7. Submit the form.","Name: J$hn 
+Last name: DÝe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Password123",Error message indicating invalid characters in name.,User remains on the registration page.,Error message displayed.,Pass
+TC13,Verify registration with valid inputs including numeric password,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name. 
+3. Enter date of birth.
+4. Enter valid email.
+5. Enter numeric password. 
+6. Confirm password. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: 12345678",User should be successfully registered.,User is redirected to the login page.,User was successfully registered.,Pass
+TC14,Verify registration with maximum length name,User is not registered.,"1. Navigate to the registration page. 
+2. Enter name with maximum allowed length. 
+3. Enter date of birth.
+4. Enter valid email. 
+5. Enter valid password. 
+6. Confirm password. 
+7. Submit the form.","Name: Johnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Last name: Doeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Password123",User should be successfully registered.,User is redirected to the login page.,User was successfully registered.,Pass
+TC15,Verify registration with already registered email,User is not registered.,"1. Navigate to the registration page. 
+2. Enter valid name. 
+3. Enter date of birth.
+4. Enter an email that is already registered. 5. Enter valid password. 
+6. Confirm password. 
+7. Submit the form.","Name: John 
+Last name: Doe 
+DoB: 01.01.2001
+Email: john@example.com 
+Password/Confirm: Password123",Error message indicating email is already registered.,User remains on the registration page.,Error message displayed.,Pass

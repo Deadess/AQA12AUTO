@@ -1,0 +1,42 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Login Suite with Parameters">
+    <test name="Login Test with Parameters">
+        <parameter name="url" value="https://qa-course-01.andersenlab.com"/>
+        <parameter name="username" value="bb@bb"/>
+        <parameter name="password" value="123123123"/>
+        <groups>
+            <run>
+                <exclude name="dataProviderTests"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="lesson3.LoginTestWithParameters"/>
+        </classes>
+    </test>
+    <test name="Login Test with Parameters 2">
+        <parameter name="url" value="https://qa-course-01.andersenlab.com"/>
+        <parameter name="username" value="cc@cc"/>
+        <parameter name="password" value="123123123"/>
+        <groups>
+            <run>
+                <exclude name="dataProviderTests"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="lesson3.LoginTestWithParameters"/>
+        </classes>
+    </test>
+    <test name="Login Test with Parameters 3">
+        <parameter name="url" value="https://qa-course-01.andersenlab.com"/>
+        <parameter name="username" value="dd@dd"/>
+        <parameter name="password" value="321321321"/>
+        <groups>
+            <run>
+                <exclude name="dataProviderTests"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="lesson3.LoginTestWithParameters"/>
+        </classes>
+    </test>
+</suite>
